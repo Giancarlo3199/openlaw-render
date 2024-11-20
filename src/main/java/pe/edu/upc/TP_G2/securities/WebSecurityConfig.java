@@ -53,8 +53,8 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
@@ -68,8 +68,8 @@ public class WebSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return httpSecurity.build();
+        return http.build();
     }
 }
